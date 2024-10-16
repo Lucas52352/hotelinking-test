@@ -41,3 +41,6 @@ Route::middleware('auth:sanctum')->put('redeem-code/{codigoId}', [CodeController
 
 Route::middleware('auth:sanctum')->get('my-codes', [CodeController::class, 'getMyCodes']);
 
+Route::get('sanctum/csrf-cookie', function () {
+    return response()->json(['message' => 'CSRF token set.']);
+});
