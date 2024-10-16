@@ -1,13 +1,12 @@
 import axios, { AxiosError } from "axios";
 import { axiosInstance } from "./axiosInstance";
 
-interface LoginResponse {
-  token: string;
-}
-
 export const loginUser = async (credentials: { email: string; password: string }) => {
   try {
-    const response = await axiosInstance.post('/login', credentials); // No incluye el token CSRF
+
+    axiosInstance.get('sanctum/csrf-cookie')
+
+    const response = await axiosInstance.post('api/login', credentials); // No incluye el token CSRF
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -26,8 +25,8 @@ export const registerUser = async (userData: {
   password_confirmation: string
 }) => {
   try {
-    const response = await axiosInstance.post('/register', userData)
-    console.log(response.data);
+    axiosInstance.get('sanctum/csrf-cookie')
+    const response = await axiosInstance.post('api/register', userData)
 
     return response.data
   } catch (error: unknown) {
@@ -50,16 +49,5 @@ export const registerUser = async (userData: {
     }
   }
 }
-
-export const getCSRFToken = async () => {
-  try {
-    await axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie');
-    console.log("CSRF token obtained successfully.");
-  } catch (error) {
-    console.error("Error obtaining CSRF token:", error);
-    throw error;
-  }
-};
-
 
 

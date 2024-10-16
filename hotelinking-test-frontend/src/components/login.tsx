@@ -1,28 +1,40 @@
 'use client'
 
 import { loginUser } from "@/services/authService";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react"
 
 const LoginComponent = () => {
+  
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    setError(''); // Limpiar el error anterior
+    setError('');
+    setIsLoading(true); // Optional: loading state
     try {
       const data = await loginUser({ email, password });
       console.log('User logged in:', data);
+      localStorage.setItem('token', data.token);
 
-      localStorage.setItem('token', data.token)
+      // Redirect to promotions page
 
-      // Aquí puedes redirigir o guardar el token según tu lógica
+      router.replace('/promotions')
+
+
     } catch (error) {
       console.log('Login failed: ', error);
-      setError('Error al iniciar sesión. Verifica tus credenciales.'); // Manejo de errores
+      setError('Error al iniciar sesión. Verifica tus credenciales.'); // Error handling
+    } finally {
+      setIsLoading(false); // End loading
     }
-  }
+  };
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-light-gray">
@@ -55,8 +67,12 @@ const LoginComponent = () => {
           />
         </div>
 
-        <button type="submit" className="w-full bg-purple text-white py-2 rounded-md hover:bg-light-purple transition duration-200">
-          Iniciar Sesión
+        <button
+          type="submit"
+          className={`w-full ${isLoading ? 'bg-gray-300' : 'bg-purple'} text-white py-2 rounded-md hover:bg-light-purple transition duration-200`}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
         </button>
       </form>
     </div>
