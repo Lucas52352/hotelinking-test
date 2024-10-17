@@ -17,9 +17,9 @@ services:
   db:
     image: mysql:latest
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_USER: ${MYSQL_ROOT_USER}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: hotelinking_test
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD:
     ports:
       - "3306:3306"
     volumes:
