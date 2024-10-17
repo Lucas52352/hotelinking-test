@@ -18,6 +18,7 @@ MYSQL_ROOT_USER=root
 MYSQL_ROOT_PASSWORD=
 
 Run Docker Containers
+
 Navigate to the project root directory and run the following command to start the Docker containers:
 
 docker-compose up -d
@@ -27,6 +28,7 @@ This command will start the MySQL database and the frontend application.
 Migrate the Database If you have a migration setup for the backend, run the migrations to set up the database schema. You can do this by connecting to the Docker container running your backend API (replace backend-container with the name of your backend container): bash Copy code docker exec -it backend-container php artisan migrate
 
 Access the Application Once the containers are up and running, you can access the frontend application in your web browser at:
+
 http://localhost:3000
 
 The backend API should be accessible at:
