@@ -26,27 +26,15 @@ export const registerUser = async (userData: {
   password_confirmation: string
 }) => {
   try {
-    axiosInstance.get('sanctum/csrf-cookie')
+    await axiosInstance.get('sanctum/csrf-cookie')
     const response = await axiosInstance.post('api/register', userData)
 
     return response.data
-  } catch (error: unknown) {
-
+  } catch (error) {
     if (axios.isAxiosError(error)) {
-
-      if (error.response) {
-
-        throw new Error(error.response.data.message || 'An error occurred');
-      }
-      else if (error.request) {
-        throw new Error('No response received from server');
-      }
-      else {
-        throw new Error(error.message);
-      }
-    }
-    else {
-      throw new Error('An unexpected error ocurred');
+      throw new Error(error.response?.data.message || 'An error occurred');
+    } else {
+      throw new Error('An unexpected error occurred');
     }
   }
 }

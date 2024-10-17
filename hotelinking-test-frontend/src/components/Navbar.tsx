@@ -12,8 +12,7 @@ export default function Navbar() {
     logoutUser();
   }
 
-  // No mostrar la navbar en la página de inicio si no está autenticado
-  if (pathname === '/' || pathname === '/login') {
+  if (pathname === '/' || pathname === '/login' || pathname === '/register') {
     return null;
   }
 

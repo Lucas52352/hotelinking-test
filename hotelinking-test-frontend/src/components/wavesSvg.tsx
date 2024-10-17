@@ -2,7 +2,7 @@ export const WavesSvg = () => {
   return (
     <>
       <svg
-        className="absolute bottom-0 left-0 w-full"
+        className="absolute bottom-0 left-0 w-screen h-[150px] z-0" // Cambiamos w-full a w-screen
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
       >
@@ -12,5 +12,5 @@ export const WavesSvg = () => {
         ></path>
       </svg>
     </>
-  )
-}
+  );
+};

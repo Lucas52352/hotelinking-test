@@ -15,7 +15,7 @@ class AuthController extends Controller
         $validateData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
         $validateData['password'] = Hash::make($validateData['password']);
@@ -39,7 +39,7 @@ class AuthController extends Controller
             Log::info($user);
 
             if ($user) {
-                $token = $request->user()->createToken('token')->plainTextToken;  
+                $token = $request->user()->createToken('token')->plainTextToken;
             }
             return response()->json([
                 'message' => 'Login successful',
@@ -59,6 +59,4 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Logout successful']);
     }
-
-
 }

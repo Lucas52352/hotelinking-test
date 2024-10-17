@@ -4,10 +4,17 @@ import { loginUser } from "@/services/authService";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react"
 
+interface LoginData {
+  email: string,
+  password: string
+}
+
 const LoginComponent = () => {
-  
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [loginData, setLoginData] = useState<LoginData>({
+    email: '',
+    password: ''
+  })
+
   const [error, setError] = useState<string>('');
   const router = useRouter();
 
@@ -16,24 +23,20 @@ const LoginComponent = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError('');
-    setIsLoading(true); // Optional: loading state
+    setIsLoading(true);
     try {
-      const data = await loginUser({ email, password });
+      const data = await loginUser(loginData);
       localStorage.setItem('token', data.token);
-
-      // Redirect to promotions page
 
       router.replace('/promotions')
 
-
     } catch (error) {
       console.log('Login failed: ', error);
-      setError('Error al iniciar sesión.'); // Error handling
+      setError('Error al iniciar sesión.');
     } finally {
-      setIsLoading(false); // End loading
+      setIsLoading(false);
     }
   };
-
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-light-gray">
@@ -45,8 +48,8 @@ const LoginComponent = () => {
           <input
             name="email"
             type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            value={loginData.email}
+            onChange={(event) => setLoginData({ ...loginData, email: event.target.value })}
             placeholder="E-mail"
             required
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-light-purple focus:border-transparent"
@@ -58,8 +61,8 @@ const LoginComponent = () => {
           <input
             name="password"
             type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            value={loginData.password}
+            onChange={(event) => setLoginData({ ...loginData, password: event.target.value })}
             placeholder="Contraseña"
             required
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-light-purple focus:border-transparent"
