@@ -1,0 +1,17 @@
+# Ignorar el archivo .env
+.env
+
+# Ignorar dependencias
+node_modules/
+dist/
+build/
+
+# Ignorar archivos de log
+*.log
+
+# Ignorar archivos del sistema
+.DS_Store
+
+# Ignorar otros archivos innecesarios
+coverage/
+*.tmp

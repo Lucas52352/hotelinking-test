@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react';
-import { axiosInstance } from '@/services/axiosInstance';
 import { registerUser } from '@/services/authService';
 import { useRouter } from "next/navigation";
 
@@ -16,7 +15,6 @@ const Register = () => {
   })
 
   const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
@@ -25,21 +23,19 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
     setIsLoading(true);
     try {
       console.log(userData);
 
-      const data = await registerUser({
+      await registerUser({
         name: userData.name,
         email: userData.email,
         password: userData.password,
         password_confirmation: userData.password_confirmation
       });
       router.replace('/promotions')
-      setSuccess('Usuario creado exitosamente!');
-    } catch (err) {
-      setError('Error al crear el usuario.');
+    } catch (error) {
+      setError(`Error al crear el usuario: ${error}`);
     } finally {
       setIsLoading(false);
     }

@@ -4,7 +4,6 @@ import { axiosInstance } from "./axiosInstance";
 export const loginUser = async (credentials: { email: string; password: string }) => {
   try {
 
-    await axiosInstance.get('sanctum/csrf-cookie', { withCredentials: true })
 
     const response = await axiosInstance.post('api/login', credentials);
 
@@ -26,7 +25,6 @@ export const registerUser = async (userData: {
   password_confirmation: string
 }) => {
   try {
-    await axiosInstance.get('sanctum/csrf-cookie')
     const response = await axiosInstance.post('api/register', userData)
 
     return response.data

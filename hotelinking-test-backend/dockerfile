@@ -1,0 +1,19 @@
+# Usa la imagen oficial de PHP como base
+FROM php:8.0-fpm
+
+# Instala las extensiones necesarias y Composer
+RUN apt-get update && apt-get install -y \
+  libzip-dev \
+  unzip \
+  && docker-php-ext-install zip \
+  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+EXPOSE 9000
+
+# Configura el directorio de trabajo
+WORKDIR /var/www
+
+# Copia los archivos del proyecto al contenedor
+COPY . .

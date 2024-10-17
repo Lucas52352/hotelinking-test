@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # app:
+  #   build:
+  #     context: ./hotelinking-test-backend
+  #     dockerfile: Dockerfile 
+  #   volumes:
+  #     - ./hotelinking-test-backend:/var/www
+  #   ports:
+  #     - "9000:9000"
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - hotelinking-net
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_USER: ${MYSQL_ROOT_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./hotelinking_test_dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - hotelinking-net
+
+  frontend:
+    build:
+      context: ./hotelinking-test-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./hotelinking-test-frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    # depends_on:
+    #   - app
+    networks:
+      - hotelinking-net
+
+networks:
+  hotelinking-net:
