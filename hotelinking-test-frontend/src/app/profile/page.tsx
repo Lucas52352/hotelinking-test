@@ -1,62 +1,58 @@
-'use client';
+'use client'
 
 import { axiosInstance } from "@/services/axiosInstance";
 import { useEffect, useState } from "react";
 
 interface User {
-  id: string,
-  name: string
-  email: string
+  id: string;
+  name: string;
+  email: string;
 }
 
 interface Code {
-  id: string
-  codigo: string
-  estado: string
-  used_in: Date | null
-  oferta_id: number
+  id: string;
+  codigo: string;
+  estado: string;
+  used_in: Date | null;
+  oferta_id: number;
 }
 
 interface Promotion {
   id: number;
-  descripcion: string,
-  precio: number
-};
-
+  descripcion: string;
+  precio: number;
+}
 
 export default function ProfilePage() {
-
-  const [user, setUser] = useState<User>()
+  const [user, setUser] = useState<User>();
   const [codes, setCodes] = useState<Code[]>([]);
   const [promotions, setPromotions] = useState<Promotion[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
-
       try {
-        const response = await axiosInstance.get('api/user');
-        setUser(response.data)
-
+        const response = await axiosInstance.get('/api/user');
+        setUser(response.data);
       } catch (error) {
         setError('Error retrieving user data');
         console.log('Error retrieving user data: ', error);
       }
-    }
+    };
 
     const getUserCodes = async () => {
       try {
-        const response = await axiosInstance.get('api/my-codes')
-        setCodes(response.data)
+        const response = await axiosInstance.get('/api/my-codes');
+        setCodes(response.data);
       } catch (error) {
         setError('Error retrieving user codes');
         console.log('Error retrieving user codes: ', error);
       }
-    }
+    };
 
     const getPromotions = async () => {
       try {
-        const response = await axiosInstance.get('api/promotions');
+        const response = await axiosInstance.get('/api/promotions');
         setPromotions(response.data);
       } catch (error) {
         setError('Error retrieving promotions');
@@ -67,27 +63,30 @@ export default function ProfilePage() {
     getUser();
     getUserCodes();
     getPromotions();
-  }, [])
+  }, []);
 
   if (error) return <p className="text-red-500">{error}</p>;
-  if (!user) return <>Cargando...</>
+  if (!user) return <>Cargando...</>;
 
   const getPromotionName = (ofertaId: number) => {
     const promotion = promotions.find(promo => promo.id === ofertaId);
     return promotion ? promotion.descripcion : 'Promoción no encontrada';
   };
 
-  const handleRedeemCode = async (id: number) => {
-    const codeId = id;
+  const handleRedeemCode = async (id: string) => {
     try {
-      await axiosInstance.put(`api/redeem-code/${codeId}`)
-      alert('Code redeemed successfully');
-
-    } catch (error) {
-      console.log('Error redeeming code: ', error);
+      await axiosInstance.put(`api/redeem-code/${id}`);
+      // Actualiza el estado local del código canjeado
+      setCodes(prevCodes =>
+        prevCodes.map(code =>
+          code.id === id ? { ...code, estado: 'redeemed' } : code
+        )
+      );
+      alert('Código canjeado con éxito');
+    } catch (error: any) {
+      console.log('Error al canjear el código: ', error.response.data);
     }
-  }
-
+  };
 
   return (
     <div className="p-4">
@@ -106,10 +105,11 @@ export default function ProfilePage() {
               <p><strong>Código:</strong> {code.codigo}</p>
               <p><strong>Estado:</strong> {code.estado}</p>
               <p><strong>Utilizado en:</strong> {code.used_in ? code.used_in.toString() : 'No utilizado'}</p>
-              <p><strong>Promocion:</strong> {getPromotionName(code.oferta_id)}</p>
+              <p><strong>Promoción:</strong> {getPromotionName(code.oferta_id)}</p>
               <button
-                onClick={() => handleRedeemCode(code.oferta_id)}
-                className="flex-1 ml-2 bg-teal-600 text-white py-3 rounded-md hover:bg-teal-300 hover:text-black transition duration-200 transform hover:scale-105 shadow-md"
+                onClick={() => handleRedeemCode(code.id)}
+                className={`p-2 flex-1 ml-2 bg-teal-600 text-white py-3 rounded-md hover:bg-teal-300 hover:text-black transition duration-200 transform hover:scale-105 shadow-md ${code.estado === 'redeemed' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={code.estado === 'redeemed'}
               >
                 Canjear Código
               </button>
@@ -118,5 +118,5 @@ export default function ProfilePage() {
         </ul>
       )}
     </div>
-  )
+  );
 }

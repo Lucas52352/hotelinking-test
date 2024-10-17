@@ -26,7 +26,7 @@ const LoginComponent = () => {
     setIsLoading(true);
     try {
       const data = await loginUser(loginData);
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('access_token', data.token);
 
       router.replace('/promotions')
 
