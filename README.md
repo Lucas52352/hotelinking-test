@@ -12,7 +12,9 @@ cd hotelinking-test
 
 Create a .env file in the root of your project directory and define the necessary environment variables. Here’s a sample:
 MYSQL_DATABASE=hotelinking_test
+
 MYSQL_ROOT_USER=root
+
 MYSQL_ROOT_PASSWORD=
 
 Run Docker Containers
