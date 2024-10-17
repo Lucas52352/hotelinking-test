@@ -5,6 +5,7 @@ Prerequisites Before running the application, ensure you have the following inst
 Docker Docker Compose Node.js (if you want to run the frontend locally outside of Docker) Getting Started
 
 Clone the Repository
+
 git clone https://github.com/Lucas52352/hotelinking-test.git
 
 cd hotelinking-test
