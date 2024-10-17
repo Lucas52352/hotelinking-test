@@ -8,15 +8,16 @@ Node.js (if you want to run the frontend locally outside of Docker)
 Getting Started
 
 1. Clone the Repository:
+
 git clone https://github.com/Lucas52352/hotelinking-test.git
 
 cd hotelinking-test
 
-In hotelinking-test-backend run the following command:
+2. In hotelinking-test-backend run the following command:
 
 composer install
 
-Navigate to the project root directory and run the following command to start the Docker containers:
+3. Navigate back to the project root directory (hotelinking-test/) and run the following command to start the Docker containers:
 
 docker-compose up -d
 
