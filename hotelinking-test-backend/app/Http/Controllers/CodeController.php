@@ -68,6 +68,7 @@ class CodeController extends Controller
         }
 
         $codigo->estado = 'redeemed';
+        $codigo->used_in = today();
         $codigo->save();
 
         return response()->json(['message' => 'Code redeemed successfully'], 200);

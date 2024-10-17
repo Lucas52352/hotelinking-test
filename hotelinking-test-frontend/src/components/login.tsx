@@ -19,7 +19,6 @@ const LoginComponent = () => {
     setIsLoading(true); // Optional: loading state
     try {
       const data = await loginUser({ email, password });
-      console.log('User logged in:', data);
       localStorage.setItem('token', data.token);
 
       // Redirect to promotions page
@@ -29,7 +28,7 @@ const LoginComponent = () => {
 
     } catch (error) {
       console.log('Login failed: ', error);
-      setError('Error al iniciar sesión. Verifica tus credenciales.'); // Error handling
+      setError('Error al iniciar sesión.'); // Error handling
     } finally {
       setIsLoading(false); // End loading
     }

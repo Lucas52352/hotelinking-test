@@ -2,21 +2,21 @@ import axios from 'axios';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
-  timeout: 1000,
   headers: {
     "X-Requested-With": "XMLHttpRequest",
     "Accept": "application/json",
     "Content-Type": "application/json",
-  }
+  },
 });
 
 axiosInstance.defaults.withCredentials = true;
-axiosInstance.defaults.withXSRFToken = true;
+axiosInstance.defaults.withXSRFToken = false;
 
 axiosInstance.interceptors.request.use((config) => {
   const token = getCookie('XSRF-TOKEN');
+
   if (token) {
-    console.log(token);
+    console.log("CSRF token obtained successfully.", token);
 
     // Asignar el token a los encabezados
     config.headers['X-XSRF-TOKEN'] = decodeURIComponent(token);

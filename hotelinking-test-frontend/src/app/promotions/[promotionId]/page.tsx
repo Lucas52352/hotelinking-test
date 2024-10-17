@@ -12,9 +12,6 @@ interface Promotion {
 const PromotionDetailPage = ({ params }: { params: { promotionId: string } }) => {
   const [promotion, setPromotion] = useState<Promotion>();
 
-  console.log('id', params.promotionId);
-
-
   useEffect(() => {
     const getPromotionDetail = async () => {
       if (!params.promotionId) return; // Previene hacer una solicitud si id no está disponible
@@ -28,7 +25,6 @@ const PromotionDetailPage = ({ params }: { params: { promotionId: string } }) =>
 
     getPromotionDetail();
   }, [params.promotionId]);
-  console.log('promocion', promotion);
 
   const handleGenerateCode = async () => {
     try {
@@ -39,16 +35,6 @@ const PromotionDetailPage = ({ params }: { params: { promotionId: string } }) =>
     }
   };
 
-  const handleRedeemCode = async () => {
-    const codeId = prompt('Enter code Id to redeem:');
-    try {
-      await axiosInstance.put(`api/redeem-code/${codeId}`)
-      alert('Code redeemed successfully');
-
-    } catch (error) {
-      console.log('Error redeeming code: ', error);
-    }
-  }
 
   if (!promotion) return <p>Cargando...</p>
 
@@ -63,13 +49,6 @@ const PromotionDetailPage = ({ params }: { params: { promotionId: string } }) =>
           className="flex-1 bg-purple text-white py-3 rounded-md hover:bg-violet-400 hover:text-black transition duration-200 transform hover:scale-105 shadow-md"
         >
           Generar Código
-        </button>
-
-        <button
-          onClick={handleRedeemCode}
-          className="flex-1 ml-2 bg-teal-600 text-white py-3 rounded-md hover:bg-teal-300 hover:text-black transition duration-200 transform hover:scale-105 shadow-md"
-        >
-          Canjear Código
         </button>
       </div>
     </div>
