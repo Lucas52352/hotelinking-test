@@ -22,6 +22,7 @@ Getting Started
 2. In hotelinking-test-backend run the following commands:
 
 ```composer install```
+
 ```php artisan serve```
 
 3. Navigate back to the project root directory (hotelinking-test/) and run the following command to start the Docker containers:
