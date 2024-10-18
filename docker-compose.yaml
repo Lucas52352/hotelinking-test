@@ -19,7 +19,7 @@ services:
     environment:
       MYSQL_DATABASE: hotelinking_test
       MYSQL_ROOT_USER: root
-      ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
     volumes:
