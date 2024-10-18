@@ -90,11 +90,13 @@ export default function ProfilePage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold text-purple">Perfil del Usuario</h1>
-      <p><strong>ID:</strong> {user.id}</p>
-      <p><strong>Email:</strong> {user.email}</p>
+      <div className="flex flex-col w-full items-center justify-end border-b-2 rounded-md">
+        <h1 className="text-3xl font-bold text-purple">Perfil del Usuario</h1>
+        <p><strong>ID:</strong> {user.id}</p>
+        <p><strong>Email:</strong> {user.email}</p>
+      </div>
 
-      <h2 className="mt-6 text-2xl font-semibold text-purple">Códigos Asociados</h2>
+      <h2 className="mt-6 text-2xl font-semibold text-purple text-center">Códigos Asociados</h2>
       {codes.length === 0 ? (
         <p>No tienes códigos asociados.</p>
       ) : (

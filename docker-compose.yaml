@@ -27,19 +27,19 @@ services:
     networks:
       - hotelinking-net
 
-  frontend:
-    build:
-      context: ./hotelinking-test-frontend
-      dockerfile: Dockerfile
-    volumes:
-      - ./hotelinking-test-frontend:/app
-      - /app/node_modules
-    ports:
-      - "3000:3000"
-    # depends_on:
-    #   - app
-    networks:
-      - hotelinking-net
+  # frontend:
+  #   build:
+  #     context: ./hotelinking-test-frontend
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./hotelinking-test-frontend:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - "3000:3000"
+  #   # depends_on:
+  #   #   - app
+  #   networks:
+  #     - hotelinking-net
 
 networks:
   hotelinking-net:
