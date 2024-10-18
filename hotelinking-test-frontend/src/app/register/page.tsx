@@ -25,8 +25,6 @@ const Register = () => {
     setError('');
     setIsLoading(true);
     try {
-      console.log(userData);
-
       await registerUser({
         name: userData.name,
         email: userData.email,
