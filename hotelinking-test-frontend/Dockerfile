@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Start the application in development mode
-CMD ["npm", "run", "dev"]  # Asegúrate de que "dev" esté definido en tu package.json
+CMD npm run dev
