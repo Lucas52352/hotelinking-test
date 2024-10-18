@@ -6,7 +6,7 @@ Prerequisites Before running the application, ensure you have the following inst
 
  - Docker Compose 
 
- - Node.js (if you want to run the frontend locally outside of Docker) 
+ - Node.js (20.11.1) (if you want to run the frontend locally outside of Docker) 
 
  - Laravel:
 ```bash
@@ -38,14 +38,14 @@ php artisan serve
 
 3. Here you have two options:
 
-3-1. Navigate back to the project root directory (hotelinking-test/) and run the following command to start the Docker containers:
+a) In the root directory (hotelinking-test/) and run the following command to start the Docker containers:
 
 ```bash
 docker-compose up -d
 ```
 This command will start the MySQL database and the NextJs frontend application.
 
-3-2. Navigate to the frontend directory and install the dependencies tu run it locally:
+b) Navigate to the frontend directory (hotelinking-test/hotelinking-test-frontend) and install the dependencies tu run it locally:
 
 ```bash
 npm install
