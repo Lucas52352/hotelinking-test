@@ -18,23 +18,44 @@ Getting Started
 
 1. Clone the Repository:
 
-```git clone https://github.com/Lucas52352/hotelinking-test.git```
+```bash
+git clone https://github.com/Lucas52352/hotelinking-test.git
+```
 
-```cd hotelinking-test```
+```bash
+cd hotelinking-test
+```
 
 2. In hotelinking-test-backend run the following commands:
 
-```composer install```
+```bash
+composer install
+```
 
-```php artisan serve```
+```bash
+php artisan serve
+```
 
-3. Navigate back to the project root directory (hotelinking-test/) and run the following command to start the Docker containers:
+3. Here you have two options:
 
-```docker-compose up -d```
+3-1. Navigate back to the project root directory (hotelinking-test/) and run the following command to start the Docker containers:
 
+```bash
+docker-compose up -d
+```
 This command will start the MySQL database and the NextJs frontend application.
 
-Access the Application Once the containers are up and running, you can access the frontend application in your web browser at:
+3-2. Navigate to the frontend directory and install the dependencies tu run it locally:
+
+```bash
+npm install
+```
+
+```bash
+npm run dev
+```
+
+Access the Application in your web browser at:
 
 http://localhost:3000
 
