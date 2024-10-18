@@ -36,16 +36,16 @@ composer install
 php artisan serve
 ```
 
-3. Here you have two options:
+and create the .env file and paste the content from .env.example
 
-a) In the root directory (hotelinking-test/) and run the following command to start the Docker containers:
+3. In the root directory (hotelinking-test/) and run the following command to start the Docker container:
 
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
-This command will start the MySQL database and the NextJs frontend application.
+This command will start the MySQL database.
 
-b) Navigate to the frontend directory (hotelinking-test/hotelinking-test-frontend) and install the dependencies tu run it locally:
+b) Navigate to the frontend directory (hotelinking-test/hotelinking-test-frontend) and install the dependencies to run it locally:
 
 ```bash
 npm install
