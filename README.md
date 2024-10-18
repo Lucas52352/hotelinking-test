@@ -4,6 +4,7 @@ Prerequisites Before running the application, ensure you have the following inst
 Docker 
 Docker Compose 
 Node.js (if you want to run the frontend locally outside of Docker) 
+Laravel: 'composer global require laravel/installer'
 
 Getting Started
 
