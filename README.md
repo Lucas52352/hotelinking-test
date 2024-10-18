@@ -2,13 +2,13 @@ Hotel Linking Application This project is a hotel linking application that allow
 
 Prerequisites Before running the application, ensure you have the following installed on your machine:
 
-Docker 
+ - Docker 
 
-Docker Compose 
+ - Docker Compose 
 
-Node.js (if you want to run the frontend locally outside of Docker) 
+ - Node.js (if you want to run the frontend locally outside of Docker) 
 
-Laravel: 'composer global require laravel/installer'
+ - Laravel: 'composer global require laravel/installer'
 
 
 Getting Started
